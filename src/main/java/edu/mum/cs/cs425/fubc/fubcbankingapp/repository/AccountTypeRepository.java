@@ -1,4 +1,7 @@
 package edu.mum.cs.cs425.fubc.fubcbankingapp.repository;
 
-public interface AccountTypeRepository {
+import edu.mum.cs.cs425.fubc.fubcbankingapp.model.AccountType;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface AccountTypeRepository extends PagingAndSortingRepository<AccountType, Integer> {
 }

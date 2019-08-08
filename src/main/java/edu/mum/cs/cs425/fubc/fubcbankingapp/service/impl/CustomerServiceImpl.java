@@ -1,4 +1,6 @@
 package edu.mum.cs.cs425.fubc.fubcbankingapp.service.impl;
 
-public class CustomerServiceImpl {
+import edu.mum.cs.cs425.fubc.fubcbankingapp.service.CustomerService;
+
+public class CustomerServiceImpl implements CustomerService {
 }

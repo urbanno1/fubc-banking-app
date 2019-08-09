@@ -1,7 +1,11 @@
 package edu.mum.cs.cs425.fubc.fubcbankingapp.model;
 
-public class AccountType {
+import javax.persistence.*;
 
+@Entity()
+@Table(name = "accounttypes")
+public class AccountType {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountTypeId;
     private String accountTypeName;
 

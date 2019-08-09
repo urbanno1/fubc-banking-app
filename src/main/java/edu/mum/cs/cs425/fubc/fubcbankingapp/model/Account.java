@@ -1,6 +1,14 @@
 package edu.mum.cs.cs425.fubc.fubcbankingapp.model;
 
+import org.hibernate.annotations.ManyToAny;
+
+import javax.jws.Oneway;
+import javax.persistence.*;
+
+@Entity()
+@Table(name = "accounts")
 public class Account {
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
     private Long accountNumber;
     private Float balance;
@@ -37,4 +45,28 @@ public class Account {
     public void setBalance(Float balance) {
         this.balance = balance;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "accountType_id")
+    private AccountType accountType;
 }

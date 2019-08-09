@@ -1,30 +1,40 @@
 package edu.mum.cs.cs425.fubc.fubcbankingapp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.Mapping;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity()
+@Table(name = "customers")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
-
+    @NotNull(message = "Customer Number can't be null")
     private Long customerNumber;
+    @NotNull(message = "FirstName can't be null")
+    private String firstName;
 
-    public String firstName;
+    private String middleName;
+    @NotNull(message = "LastName can't be null")
+    private String lastName;
 
-    public String middleName;
+    private String emailAddress;
+    private String contactPhoneNumber;
 
-    public String lastName;
-
-    public String emailAddress;
-
-    public String contactPhoneNumber;
-
-    public LocalDate dateOfBirth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
 
     public Customer() {
     }
 
-    public Customer(Long customerId, Long customerNumber, String firstName, String middleName, String lastName,
+    public Customer(Long customerNumber, String firstName, String middleName, String lastName,
                     String emailAddress, String contactPhoneNumber, LocalDate dateOfBirth) {
-        this.customerId = customerId;
         this.customerNumber = customerNumber;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -97,4 +107,15 @@ public class Customer {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList.addAll(accountList);
+    }
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Account> accountList = new ArrayList<Account>();
 }

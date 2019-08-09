@@ -12,37 +12,42 @@
     <link rel="icon" href="favicon.ico">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
-    <title>eFUBC - a banking application</title>
+    <title>eLibrary - a demo spring boot webapp featuring CRUD - New Book Form</title>
 </head>
 <body>
-<div class="container">
+
+<div style="padding-top:1em;" class="container">
     <th:block layout:fragment="content">
+        <div style="margin-bottom: 1em;">
+            <span style="font-size: 2em; color: #32a5e7;">New Book Form</span>
+        </div>
 
-        <h3>Welcome to the eFUBC system (eFUBC)</h3>
-        <hr/>
-        <th:block style="font-size: 1em">
-            To learn more about the banking systems click here to begin <a href="/eregistrar/student/list">banking systems</a>, please first make sure to read the
-            instructions and key points provided below. And then click the
-            appropriate menu item, located on the menu-bar above.<br/><br/>
-
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with
-            the release of Letraset sheets containing Lorem Ipsum passages, and
-            more recently with desktop publishing software like Aldus PageMaker
-            including versions of Lorem Ipsum.
-        </th:block>
+        <form id="newCustomerForm" method="post" th:action="@{${page_links.get('ACCOUNTTYPE_ADD_URL')}}" th:object="${accounttype}">
+            <fieldset>
+                <input type="hidden" name="accountTypeId" th:value="${accounttype.accountTypeId}"/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="accountTypeName">Account Name</label>
+                            <span th:if="${#fields.hasErrors('accountTypeName')}" th:errors="*{accountTypeName}"
+                                  class="alert alert-danger"></span>
+                            <input id="accountTypeName" name="accountTypeName" type="text" placeholder="e.g: Savings, etc" class="form-control"
+                                   th:value="${accounttype.accountTypeName}">
+                        </div>
+                    </div>
+                </div>
+                <div style="float:right;">
+                    <a th:href="@{${page_links.get('ACCOUNTTYPE_LIST_URL')}}" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save Account Type</button>
+                </div>
+            </fieldset>
+        </form>
     </th:block>
+
+
 </div>
 
-<!--     <footer class="footer">
-        <div class="container">
-            <span class="text-muted">O. Kalu : : : CS425-SWE</span><span style="float:right;" class="text-muted">&copy; November 2018</span>
-        </div>
-    </footer> -->
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
